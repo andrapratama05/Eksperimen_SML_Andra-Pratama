@@ -37,7 +37,7 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirenments.txt
+          pip install -r requirements.txt
 
       # Run Automation Script
       - name: Run Automation
