@@ -9,7 +9,7 @@ on:
       - main
 
 env:
-  CSV_URL:"weather_dataset.csv"
+  CSV_URL: "weather_dataset.csv"
 
 permissions:
   contents: write
