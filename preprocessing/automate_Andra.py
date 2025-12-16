@@ -12,15 +12,11 @@ def process_data(input_path, output_path):
     df = df.dropna()
     df = df.drop_duplicates()
     
-    # Label encoding
-    le = LabelEncoder()
+    # Feature in dataset
+    numeric_features = df.select_dtypes(include='number').columns
     categorical_features = df.select_dtypes(include='object').columns
-    
-    for col in categorical_features:
-        df[col] = le.fit_transform(df[col])
         
     # Mengatasi Outlier
-    numeric_features = df.select_dtypes(include='number').columns
     Q1 = df[numeric_features].quantile(0.25)
     Q3 = df[numeric_features].quantile(0.75)
     IQR = Q3 - Q1
@@ -33,6 +29,12 @@ def process_data(input_path, output_path):
     # Normalization
     scaler = StandardScaler()
     df[numeric_features] = scaler.fit_transform(df[numeric_features])   
+    
+    # Label encoding
+    le = LabelEncoder()
+    
+    for col in categorical_features:
+        df[col] = le.fit_transform(df[col])
     
     # Rename to target
     df = df.rename(columns={'Weather Type': 'target'})
